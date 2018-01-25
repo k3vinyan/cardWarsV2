@@ -9,6 +9,7 @@
   "author": "k3vin yan",
   "license": "ISC",
   "dependencies": {
+    "crypto-random-string": "^1.0.0",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "install": "^0.10.4",
