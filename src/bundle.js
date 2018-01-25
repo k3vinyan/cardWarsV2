@@ -22017,6 +22017,8 @@ var _socket = __webpack_require__(51);
 
 var _socket2 = _interopRequireDefault(_socket);
 
+var _Event = __webpack_require__(79);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22025,17 +22027,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var socketUrl = "https://localhost:3000";
+var socketUrl = "http://localhost:3000/?";
+var socket = (0, _socket2.default)(socketUrl);
+socket.on('connect', function () {
+  console.log("connected");
+});
 
-var Layout = function (_React$Component) {
-  _inherits(Layout, _React$Component);
+var Layout = function (_Component) {
+  _inherits(Layout, _Component);
 
   function Layout(props) {
     _classCallCheck(this, Layout);
 
     var _this = _possibleConstructorReturn(this, (Layout.__proto__ || Object.getPrototypeOf(Layout)).call(this, props));
 
-    _this.componentWillMount = function () {};
+    _this.componentWillMount = function () {
+      _this.initSocket();
+    };
 
     _this.initSocket = function () {
       var socket = (0, _socket2.default)(socketUrl);
@@ -22045,8 +22053,23 @@ var Layout = function (_React$Component) {
       _this.setState({ socket: socket });
     };
 
+    _this.setUser = function (user) {
+      var socket = _this.state.socket;
+
+      socket.emit("USER_CONNECTED");
+      _this.setState({ user: user });
+    };
+
+    _this.logout = function () {
+      var socket = _this.state.socket;
+
+      socket.emit(LOGOUT);
+      _this.setState({ user: null });
+    };
+
     _this.state = {
-      socket: null
+      socket: null,
+      user: null
     };
     return _this;
   }
@@ -22065,7 +22088,7 @@ var Layout = function (_React$Component) {
   }]);
 
   return Layout;
-}(_react2.default.Component);
+}(_react.Component);
 
 exports.default = Layout;
 
@@ -25473,6 +25496,24 @@ exports.push([module.i, "body {\r\n  padding: 30px;\r\n}\r\n\r\n.margin-10 {\r\n
 
 // exports
 
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+  COMMUNITY_CHAT: "COMMUNITY_CHAT",
+  USER_CONNECTED: "USER_CONNECTED",
+  MESSAGE_RECIEVED: "MESSAGE_RECIEVED",
+  MESSAGE_SENT: "MESSAGE_SENT",
+  USER_DISCONNECTED: "USER_DISCONNECTED",
+  TYPING: "TYPING",
+  VERIFY_USER: "VERIFY_USER",
+  LOGOUT: "LOGOUT"
+};
 
 /***/ })
 /******/ ]);
