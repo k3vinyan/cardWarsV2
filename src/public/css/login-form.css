@@ -1,0 +1,13 @@
+
+.login-container {
+  border-style: solid;
+  border-color: black;
+  justify-content: center;
+  align-items: center;
+}
+.login-container div{
+  border-style: solid;
+  border-color: black;
+  text-align: center;
+  padding: 100px;
+}

@@ -21,14 +21,18 @@ export default class LoginForm extends Component {
 
   render(){
     return (
-      <div>
-        <form>
-          <label>
-            Name:
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+      <div className="login-container">
+        <div>
+          <p>Welcome!</p>
+          <form onSubmit={this.handleSubmit} >
+            <label>
+              Name:
+              <input type="text" value={this.state.value} onChange={this.handleChange} />
+            </label>
+            <br></br>
+            <input type="submit" value="Submit" className="margin-10"/>
+          </form>
+        </div>
       </div>
     )
   }
